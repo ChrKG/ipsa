@@ -28,6 +28,14 @@
 def remove_odd(L):
     # insert code
     pass
+#> validate argument
+    assert isinstance(L, list)
+    assert len(L) <= 1_000_000
+    assert all(isinstance(x, int) for x in L)
+#< validate argument
+#> solution
+    L[:] = [x for x in L if x % 2 != 1]
+#< solution
 
 
 import sys
@@ -36,4 +44,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line is #eof
+assert line.startswith('#eof')
+#< validate
 exec(code)

@@ -81,5 +81,30 @@ def print_stars(stars):
 
     pass  
 
+#> solution
+def print_stars(stars, *, alphabetically=False, highscore=False, vertical=False):
+    names, scores = zip(*stars)
+    max_name = max(map(len, names))
+    max_score = max(scores)
+
+    assert not alphabetically or not highscore
+    assert len(names) == len(set(names))
+    assert all('A' <= c <=  'Z' for name in names for c in name)
+    assert all(1 <= len(name) <= 20 for name in names)
+    assert 1 <= len(stars) <= 100
+
+    if alphabetically:
+        stars.sort()
+    if highscore: 
+        stars.sort(key=lambda score: (-score[1], score[0]))
+    if not vertical:
+        for name, score in stars:
+            print(name + '_' * (max_name - len(name) + 1) + '*' * score)
+    else:
+        for i in range(max_score, 0, -1):
+            print('_'.join('*' if score >= i else '_' for name, score in stars))
+        for i in range(max_name):
+            print('_'.join(name[i] if i < len(name) else '_' for name, score in stars))
+#< solution
 
 eval(input())

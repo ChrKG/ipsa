@@ -25,6 +25,12 @@
 def swapping(text):
     # insert code
     pass
+#> validate input
+    assert 1 <= len(text) <= 50
+#< validate input
+#> solution
+    return ''.join(text[i:i + 2][::-1] for i in range(0, len(text), 2))
+#< solution
 
 
 print(swapping(input()))

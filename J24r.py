@@ -57,3 +57,22 @@
 
 # insert code
 pass
+#> solution
+n, i, j, d = map(int, input().split())
+#< solution
+#> validate input
+assert 5 <= n <= 100 and 0 <= i < n and 0 <= j < n and 0 <= d <= 100
+#< validate input
+#> solution
+board = {(i, j)}
+for _ in range(d):
+    board_ = set()
+    for i, j in board:
+        for di, dj in ((-2, -1), (-2, 1), (-1, -2), (-1, 2), (1, -2), (1, 2), (2, -1), (2, 1)):
+            i_, j_ = i + di, j + dj
+            if 0 <= i_ < n and 0 <= j_ < n:
+                board_.add((i_, j_))
+    board = board_
+for i in range(n):
+    print(''.join('X' if (i, j) in board else '.' for j in range(n)))
+#< solution

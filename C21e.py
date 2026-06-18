@@ -24,6 +24,10 @@ def pairs(L):
     
     pass
 
+#> solution
+    assert 0 <= len(L) <= 100
+    return [(y, x) for x, y in L]
+#< solution
 
 L = eval(input())
 print(pairs(L))

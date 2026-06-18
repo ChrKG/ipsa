@@ -33,6 +33,29 @@
 def expand(L):
     # insert code
     pass
+#> validate input
+    assert type(L) == list
+    assert all(type(x) == int or x == ... for x in L)
+    assert all(0 < i < len(L) - 1 and type(L[i - 1]) == type(L[i + 1]) == int
+               for i, x in enumerate(L) if x == ...)
+#< validate input
+#> solution
+    result = []
+    for i, v in enumerate(L):
+        if v != ...:
+            result.append(v)
+        elif L[i - 1] <= L[i + 1]:
+            result.extend(range(L[i - 1] + 1, L[i + 1]))
+        else:
+            result.extend(range(L[i - 1] - 1, L[i + 1], -1))
+#< solution
+#> validate output
+    assert type(result) == list
+    assert len(result) <= 100
+#< validate output
+#> solution
+    return result
+#< solution
 
 
 print(eval(input()))

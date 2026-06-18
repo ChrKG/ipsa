@@ -53,6 +53,21 @@ r'''
 def binary_trees(labels):
     # insert code
     pass
+#> validate input
+    assert isinstance(labels, list)
+    assert all(isinstance(label, str) for label in labels)
+    assert len(labels) == len(set(labels))
+    assert len(labels) <= 100
+#< validate input
+#> solution
+    if len(labels) == 1:
+        yield labels[0]
+    else:
+        for i in reversed(range(1, len(labels))):
+            for left in binary_trees(labels[:i]):
+                for right in binary_trees(labels[i:]):
+                    yield (left, right)
+#< solution
 
 
 import sys
@@ -61,4 +76,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line is #eof
+assert line.startswith('#eof')
+#< validate
 exec(code)

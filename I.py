@@ -22,8 +22,13 @@
           that as input gets the list of tuples.
 '''
 
+
 def vector_sort(vectors):
-    pass  # insert code here
+    assert 1 <= len(vectors) <= 1000
+    assert all(isinstance(v, tuple) and len(v) == 3 for v in vectors)
+    assert len(vectors) == len(set(x**2 + y**2 + z**2 for x, y, z in vectors))
+
+    return sorted(vectors, key=lambda v: v[0]**2 + v[1]**2 + v[2]**2)
 
 
 vectors = eval(input())

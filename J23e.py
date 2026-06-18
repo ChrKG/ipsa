@@ -56,6 +56,42 @@ r'''
 def centers(tree):
     # insert code
     pass
+#> validate input
+    labels = set()
+    
+    def validate(tree):
+        if tree == None:
+            return
+        assert isinstance(tree, tuple)
+        label, left, right = tree
+        assert isinstance(label, str)
+        assert label not in labels
+        assert len(label) == 1 and 'A' <= label <= 'Z'
+        labels.add(label)
+        validate(left)
+        validate(right)
+
+    validate(tree)
+#< validate input
+#> solution
+    def solve(tree):  # returns size of tree
+        if tree == None:
+            return 0
+        label, left, right = tree
+        left_size = solve(left)
+        right_size = solve(right)
+        candidates.append((label, left_size, right_size))
+        return 1 + left_size + right_size
+    
+    candidates = []
+    size = solve(tree)
+    center_nodes = [label for label, left_size, right_size in candidates
+                    if size - left_size - right_size - 1 <= size / 2 
+                    and left_size <= size / 2 
+                    and right_size <= size / 2]
+
+    return sorted(center_nodes)
+#< solution
 
 
 print(centers(eval(input())))

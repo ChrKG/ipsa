@@ -53,4 +53,32 @@
 '''
 
 
-pass  # write your code here
+n, m = map(int, input().split())
+
+assert 2 <= n <= 20
+assert 0 <= m <= n * (n - 1)
+
+teams = {input() for _ in range(n)}
+
+assert all(1 <= len(team) <= 25 for team in teams)
+assert all(char == '_' or 'A' <= char <= 'Z' for team in teams for char in team)
+
+point = {team: 0 for team in teams}
+
+for _ in range(m):
+    A, B, a, b = input().split()
+    a = int(a)
+    b = int(b)
+
+    assert a >= 0 and b >= 0 and {A, B} <= teams
+
+    if a > b:
+        point[A] += 3
+    elif a < b:
+        point[B] += 3
+    else:
+        point[A] += 1
+        point[B] += 1
+
+for team in sorted(teams, key=lambda team: (-point[team], team)):
+    print(team, point[team])

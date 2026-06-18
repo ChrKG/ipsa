@@ -40,6 +40,11 @@ import math
 def plot(width, height, f):
     # insert code
     pass
+#> solution
+    assert 1 <= width <= 100 and 1 <= height <= 100
+    for y in range(height - 1, -1, -1):
+        print(''.join('*' if f(x, y) else '.' for x in range(0, width)))
+#< solution
 
 
 eval(input())

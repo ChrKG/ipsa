@@ -68,6 +68,19 @@
 
 # insert code
 pass
+#> solution - decorator creating a new class
+def add_power(C):
+    class C_new(C):
+        def __pow__(self, power):
+            assert 1 <= power <= 100
+            return (self ** (power - 1)) * self if power > 1 else self
+    return C_new
+#< solution
+#> solution - decorator modifying class C
+def add_power(C):
+    C.__pow__ = lambda self, power: (self ** (power - 1)) * self if power > 1 else self
+    return C
+#< solution
 
 
 import sys
@@ -76,4 +89,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line is #eof
+assert line.startswith('#eof')
+#< validate
 exec(code)

@@ -38,6 +38,13 @@
 
 # insert code
 pass
+#> solution
+def diff(sequence):
+    for i, value in enumerate(sequence):
+        if i > 0:
+            yield value - last
+        last = value
+#< solution
 
 
 import sys
@@ -46,4 +53,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line is #eof
+assert line.startswith('#eof')
+#< validate
 exec(code)

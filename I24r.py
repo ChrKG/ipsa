@@ -21,3 +21,22 @@
 
 # insert code
 pass
+#> solution
+values = sorted(map(int, input().split()))
+#< solution
+#> validate input
+assert 3 <= len(values) <= 5000
+assert len(values) == len(set(values))
+assert all(-10_000_000_000 <= x <= 10_000_000_000 for x in values)
+#< validate input
+#> solution
+S = set(values)
+for i, x in enumerate(values):
+    for y in values[i+1:]:
+        z = -(x + y)
+        if z <= y:
+            break
+        if z in S:
+            assert x < y < z and x + y + z == 0
+            print(x, y, z)
+#< solution

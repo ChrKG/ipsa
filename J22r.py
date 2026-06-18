@@ -41,6 +41,16 @@
 def converge(f):
     # insert code
     pass
+#> solution
+    def wrapper(x):
+        fx = f(x)
+        while fx != x:
+            x = fx
+            fx = f(x)
+        return fx
+
+    return wrapper
+#< solution
 
 
 import sys
@@ -49,4 +59,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line
+assert line.startswith('#eof')
+#< validate
 exec(code)

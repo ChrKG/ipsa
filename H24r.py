@@ -62,6 +62,25 @@ r'''
 class TextBlock:
     # insert code
     pass
+#> solution
+    def __init__(self, text):
+        self.lines = text.split('\n')
+        if len(self.lines[0]) == 0 or any(len(line) != len(self.lines[0]) for line in self.lines):
+            raise ValueError
+
+    def __add__(self, other):
+        if len(self.lines[0]) != len(other.lines[0]):
+            raise ValueError
+        return TextBlock('\n'.join(self.lines + other.lines))
+    
+    def __or__(self, other):
+        if len(self.lines) != len(other.lines):
+            raise ValueError
+        return TextBlock('\n'.join(a + b for a, b in zip(self.lines, other.lines)))
+
+    def __str__(self):
+        return '\n'.join(self.lines)
+#< solution
 
 
 import sys
@@ -70,4 +89,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line is #eof
+assert line.startswith('#eof')
+#< validate
 exec(code)

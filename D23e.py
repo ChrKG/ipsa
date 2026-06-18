@@ -25,3 +25,21 @@
 
 # insert code
 pass
+#> solution
+text = input()
+n = len(text)
+#< solution
+#> validate input
+assert 1 <= n <= 100
+assert all('A' <= c <= 'Z' for c in text)
+#< validate input
+#> solution
+substrs = set()
+for i in range(n): 
+    for j in range(i + 1, n + 1):
+        substr = text[i:j]
+        if len(set(substr)) == 3:
+            substrs.add(substr)
+for substr in sorted(substrs):
+    print(substr)
+#< solution

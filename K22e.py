@@ -35,6 +35,13 @@
 # insert code
 def reversible(f):
     pass
+#> solution
+    def wrapper(*args, reverse=False, **kwargs):
+        result = f(*args, **kwargs)
+        return result[::-1] if reverse else result
+
+    return wrapper
+#< solution
 
 
 import sys
@@ -43,5 +50,8 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line is #eof
+assert line.startswith('#eof')
+#< validate
 
 exec(code)

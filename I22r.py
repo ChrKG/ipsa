@@ -38,6 +38,20 @@
 class Path:
     # insert code
     pass
+#> solution
+    def __init__(self):
+        self.path = []
+
+    def add(self, x, y):
+        self.path.append((x, y))
+
+    def undo(self):
+        self.path.pop()
+
+    def distance(self):
+        return sum(((x0 - x1) ** 2 + (y0 - y1) ** 2) ** 0.5
+                   for (x0, y0), (x1, y1) in zip(self.path, self.path[1:]))
+#< solution
 
 
 import sys
@@ -46,4 +60,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line
+assert line.startswith('#eof')
+#< validate
 exec(code)

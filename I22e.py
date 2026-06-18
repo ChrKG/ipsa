@@ -51,7 +51,35 @@
 def queens(n, k):
     # insert code
     pass
+#> solution
+    def print_solution(solution):
+        assert len(solution) == len(set(solution))
+        board = ['.' * n] * n
+        for i, j in solution:
+            board[i] = [*board[i][:j], 'Q', *board[i][j + 1:]]
+        for row in reversed(board):
+            print(*row, sep='')
+        print()
+
+    def solve(i, j, partial):
+        if i >= n:
+            return partial
+        if j >= n:
+            return solve(i + 1, 0, partial)
+        for d in range(1, k + 1):
+            for r, c in [(i, j - d), (i - d, j - d), (i - d, j), (i - d, j + d)]:
+                if 0 <= r < n and 0 <= c < n and (r, c) in partial:
+                    return solve(i, j + 1, partial)
+        return max(solve(i, j + 1, {*partial, (i, j)}), solve(i, j + 1, partial), key=len)
+
+    solution = solve(0, 0, set())
+#    print_solution(solution)
+    return len(solution)
+#< solution
 
 
 n, k = map(int, input().split())
+#> validate input
+assert 2 <= k <= n <= 7
+#< validate input
 print(queens(n, k))

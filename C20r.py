@@ -34,3 +34,24 @@
 
 
 pass  # insert code here
+
+
+'''
+# solution 1
+while True:
+    line = input()
+
+    assert 1 <= len(line) <= 100
+    assert line == '.' or all('A' <= char <= 'Z' for char in line)
+    
+    if line == '.':
+        break
+    print(len(line))
+'''
+
+# solution 2
+for line in iter(input, '.'):
+    assert 1 <= len(line) <= 100
+    assert line == '.' or all('A' <= char <= 'Z' for char in line)
+    
+    print(len(line))

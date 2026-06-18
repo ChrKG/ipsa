@@ -34,10 +34,20 @@ def nonnegative(f):
 
     pass
 
+#> solution
+    #return lambda x: max(0, f(x))
+    def wrapper(x):
+        return max(0, f(x))
+    return wrapper
+#< solution
 
 
 nonnegative_function = eval(input())
 L = eval(input())
+#> solution
+assert 1 <= len(L) <= 100
+assert all(isinstance(x, int) for x in L)
+#< solution
 
 for x in L:
     y = nonnegative_function(x)

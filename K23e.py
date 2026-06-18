@@ -46,6 +46,23 @@
 
 # insert code
 pass
+#> solution
+def periodic(start, end=None):
+    if end == None:
+        start, end = 0, start
+#< solution
+#> valudate arguments
+    assert isinstance(start, int)
+    assert isinstance(end, int)
+    assert start < end
+#< validate arguments
+#> solution
+    def decorator(f):
+        def wrapper(x):
+            return f(start + (x - start) % (end - start))
+        return wrapper
+    return decorator
+#< solution
 
 
 import sys
@@ -54,4 +71,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line is #eof
+assert line.startswith('#eof')
+#< validate
 exec(code)

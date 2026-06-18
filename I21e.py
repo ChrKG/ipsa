@@ -41,5 +41,20 @@ class Vector:
 
     pass
 
+#> solution
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def mult(self, c):
+        self.x *= c
+        self.y *= c
+
+    def rotate(self):
+        self.x, self.y = -self.y, self.x
+
+    def __str__(self):
+        return f'Vector({self.x:.3f}, {self.y:.3f})'
+#< solution
     
 eval(input())

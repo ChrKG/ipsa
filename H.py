@@ -29,8 +29,11 @@
 '''
 
 
+from collections import Counter
+
 def uniques(D):
-    pass  # add your code here
+    count = Counter(D.values())
+    return sorted(key for key, value in D.items() if count[value] == 1)
 
 
 dictionary = eval(input())

@@ -36,3 +36,33 @@
 
 # insert code
 pass
+#> solution
+from functools import cache
+
+n, d = map(int, input().split())
+points = [tuple(map(int, input().split())) for _ in range(n)]
+#< solution
+#> validate input
+assert 1 <= n <= 25
+assert 1 <= d <= 25
+assert all(0 <= x <= 25 and 0 <= y <= 25 for x, y in points)
+#< validate input
+#> solution
+xs, ys = zip(*points)
+cells = [(x, y) for x in range(min(xs), max(xs)+1) for y in range(min(ys), max(ys)+1)]
+
+@cache
+def score(step, cell):
+    best = 0
+    if step < n: 
+        x, y = cell
+        for cell_ in cells:
+            x_, y_ = cell_
+            if (x_ - x)**2 + (y_ - y)**2 <= d**2:
+                best = max(best, score(step+1, cell_))
+        if points[step] == cell:
+            best += 1   
+    return best
+
+print(max(score(0, start) for start in cells))
+#< solution

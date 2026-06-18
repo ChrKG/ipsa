@@ -42,6 +42,20 @@
 
 # insert code
 pass
+#> solution
+def localmin(d):
+#< solution
+#> validate arguments
+    assert isinstance(d, int)
+    assert d >= 0
+#< validate arguments
+#> solution
+    def decorator(f):
+        def wrapper(n):
+            return min(f(n_) for n_ in range(n - d, n + d + 1))
+        return wrapper
+    return decorator
+#< solution
 
 
 import sys
@@ -50,4 +64,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line is #eof
+assert line.startswith('#eof')
+#< validate
 exec(code)

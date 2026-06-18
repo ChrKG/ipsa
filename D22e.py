@@ -22,6 +22,11 @@
 # insert code
 def plusminus():
     pass
+#> solution
+def plusminus(*x):
+    assert all(isinstance(xi, int) for xi in x)
+    return sum(x[::2]) - sum(x[1::2])
+#< solution
 
 
 print(eval(input()))

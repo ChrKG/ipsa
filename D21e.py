@@ -40,3 +40,9 @@ points = eval(input())
 
 pass
 
+#> solution
+assert 2 <= len(points) <= 25
+assert distance >= 0
+for px, py in points:
+    print(''.join('*' if (px - qx) ** 2 + (py - qy) ** 2 <= distance ** 2 else '.' for qx, qy in points))
+#< solution

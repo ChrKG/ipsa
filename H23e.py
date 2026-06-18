@@ -73,6 +73,30 @@
 class Painting:
     # insert code
     pass
+#> solution
+    def __init__(self, width, height, symbol='.'):
+#< solution
+#> validate input
+        assert 1 <= width <= 100 and 1 <= height <= 100
+        self.width = width
+        self.height = height
+#< validate input
+#> solution
+        self.rows = [[symbol] * width for _ in range(height)]
+
+    def __str__(self):
+        return '\n'.join(''.join(row) for row in reversed(self.rows))
+    
+    def rectangle(self, x1, y1, x2, y2, symbol):
+#< solution
+#> validate input
+        assert 0 <= x1 <= x2 < self.width and 0 <= y1 <= y2 < self.height
+#< validate input
+#> solution
+        for y in range(y1, y2 + 1):
+            for x in range(x1, x2 + 1):
+                self.rows[y][x] = symbol
+#< solution
 
 
 import sys
@@ -81,4 +105,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line is #eof
+assert line.startswith('#eof')
+#< validate
 exec(code)

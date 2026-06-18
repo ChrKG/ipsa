@@ -60,6 +60,34 @@
 # insert code
 def string_format(text):
     pass
+#> solution
+def string_format(text, width=None, alignment='left', spacing=0, fill='.'):
+#< solution
+#> validate input
+    assert isinstance(text, str)
+    assert width is None or isinstance(width, int)
+    assert alignment in ('left', 'right', 'center')
+    assert isinstance(spacing, int) and spacing >= 0
+    assert isinstance(fill, str) and len(fill) == 1 and fill != ' '
+#< validate input
+#> solution
+    if width is None:
+        width = len(text) + (len(text) - 1) * spacing
+#< solution
+#> validate input
+    assert width >= len(text) + (len(text) - 1) * spacing
+#< validate input
+#> solution
+    text = (fill * spacing).join(text)
+    if alignment == 'left':
+        return text.ljust(width, fill)
+    if alignment == 'right':
+        return text.rjust(width, fill)
+    if (width - len(text)) % 2 == 0:
+        return text.center(width, fill)
+    else:
+        return fill + text.center(width - 1, fill)
+#< solution
 
 
 print(eval(input()))

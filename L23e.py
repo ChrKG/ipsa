@@ -51,3 +51,64 @@
 
 # insert code
 pass
+#> solution
+import functools
+
+n = int(input())
+points = [tuple(map(int, input().split())) for _ in range(n)]
+#< solution
+#> validate input
+assert 1 <= n <= 100
+assert len(points) == len(set(points))
+#< validate input
+#> solution
+
+def dist(i, j):
+    px, py = points[i]
+    qx, qy = points[j]
+    return (px - qx) ** 2 + (py - qy) ** 2
+
+
+# None recursive solution considering thros in decreasing distance
+
+# edges = [(dist(i, j), i, j) for i in range(n) for j in range(n) if i != j]
+#
+# path = [1] * n
+# path_d = [float('inf')] * n
+# last = [None] * n
+#
+# for d, i, j in sorted(edges, reverse=True):
+#     d_j = path[i] + 1 if path_d[i] > d else last[i] + 1
+#     if d_j > path[j]:
+#         if path_d[j] > d:
+#             last[j] = path[j]
+#         path[j] = d_j
+#         path_d[j] = d
+# answer = max(path)
+# print(answer)
+
+# Solution that finds a longest valid sequence of points
+
+# @functools.cache
+# def solve(i, limit):
+#     answer = [points[i]]
+#     for j in range(n):
+#         if i != j and dist(i, j) < limit:
+#             answer = max(answer, [points[i]] + solve(j, dist(i, j)), key=len)
+#     return answer
+
+# answer = max([solve(i, float('inf')) for i in range(n)], key=len)
+# #print(len(answer), answer)
+# print(len(answer))
+
+@functools.cache
+def solve(i, limit):
+    answer = 1
+    for j in range(n):
+        if i != j and dist(i, j) < limit:
+            answer = max(answer, 1 + solve(j, dist(i, j)))
+    return answer
+
+answer = max(solve(i, float('inf')) for i in range(n))
+print(answer)
+#< solution

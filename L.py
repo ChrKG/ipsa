@@ -25,4 +25,30 @@
 '''
 
 
-pass  # write your code here
+n = int(input())
+
+assert 1 <= n <= 10000
+
+'''
+# Solution 1
+# (on Windows 10: "RecursionError: maximum recursion depth exceeded")
+def memoize(f):
+    answers = {}
+    def wrapper(*args):
+        if args not in answers:
+            answers[args] = f(*args)
+        return answers[args]
+    return wrapper
+
+@memoize
+def f(n):
+    return f(n - 1) + 2 * f(n - 2) + 3 * f(n - 3) if n >= 3 else 1
+
+print(f(n))
+'''
+
+# Solution 2
+F = []
+for N in range(n + 1):
+    F = F[-2:] + [1 if N < 3 else F[-1] + 2 * F[-2] + 3 * F[-3]]
+print(F[-1])

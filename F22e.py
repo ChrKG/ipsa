@@ -38,3 +38,17 @@
 
 # insert code
 pass
+#> solution
+select = input().split(',')
+rows = int(input())
+header = input().split(',')
+assert len(set(select)) == len(select) >= 1
+assert len(set(header)) == len(header)
+assert set(select) <= set(header)
+assert 1 <= len(header) <= 10 and rows <= 100
+for _ in range(rows):
+    row = input().split(',')
+    assert len(row) == len(header)
+    assert all(entry == entry.strip() for entry in row)
+    print(','.join(row[header.index(column)] for column in select))
+#< solution

@@ -25,3 +25,17 @@
 
 # insert code
 pass
+#> solution
+words = input().split()
+#< solution
+#> validate input
+assert 1 <= len(words) <= 100
+assert all('A' <= c <= 'Z' for w in words for c in w) 
+#< validate input
+#> solution
+doubles = set(w for i, w in enumerate(words[:-1]) if w == words[i + 1])
+if doubles:
+    print(*sorted(doubles))
+else:
+    print('-')
+#< solution

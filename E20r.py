@@ -34,5 +34,37 @@ def squares(numbers):
     pass  # insert code here
 
 
+# solutions
+import math
+
+def squares(numbers):
+    return [r for n, r in zip(numbers, map(int, map(math.sqrt, numbers))) if r * r == n]
+
+def squares(numbers):
+    out = []
+    for n in numbers:
+        r = int(math.sqrt(n))
+        if r ** 2 == n:
+            out.append(r)
+    return out
+
+def squares(numbers):
+    out = []
+    for n in numbers:
+        r = math.isqrt(n)
+        if r ** 2 == n:
+            out.append(r)
+    return out
+
+def squares(numbers):
+    return [r for n, r in zip(numbers, map(math.isqrt, numbers)) if r * r == n]
+
+
+
 numbers = eval(input())
+
+assert numbers == sorted(numbers) and len(numbers) == len(set(numbers))
+assert 1 <= len(numbers) <= 100
+assert all(1 <= x <= 10 ** 6 for x in numbers)
+
 print(squares(numbers))

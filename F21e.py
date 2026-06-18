@@ -24,3 +24,12 @@
 
 pass
 
+#> solution
+line = input()
+assert line == line.strip()
+assert len(line) <= 100
+assert all(c == ' ' or 'a' <= c <= 'z' for c in line)
+assert '  ' not in line
+words = line.split()
+print(words[0], *[word for previous, word in zip(words, words[1:]) if previous != word])
+#< solution

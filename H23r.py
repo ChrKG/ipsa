@@ -74,6 +74,50 @@
 class Queens:
     # insert code
     pass
+#> solution
+
+    def __init__(self):
+        self.queens = set()
+
+    def print(self):
+        rows = '12345678'
+        columns = 'ABCDEFGH'
+        for row in reversed(rows):
+            print(row, ''.join('Q' if column + row in self.queens else '.' for column in columns))
+        print('/ ' + columns)
+
+    def set(self, position):
+#< solution
+#> validate input
+        column, row = position
+        assert row in '12345678'
+        assert column in 'ABCDEFGH'
+        assert position not in self.queens
+#< validate input
+#> solution
+        self.queens.add(position)
+
+    def clear(self, position):
+#< solution
+#> validate input
+        column, row = position
+        assert row in '12345678'
+        assert column in 'ABCDEFGH'
+        assert position in self.queens
+#< validate input
+#> solution
+        self.queens.remove(position)
+
+    def valid(self):
+        for p in self.queens:
+            for q in self.queens:
+                if p != q:
+                    p_column, p_row = p
+                    q_column, q_row = q
+                    if p_row == q_row or p_column == q_column or abs(int(p_row) - int(q_row)) == abs(ord(p_column) - ord(q_column)):
+                        return False
+        return True
+#< solution
 
 
 import sys
@@ -82,4 +126,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line is #eof
+assert line.startswith('#eof')
+#< validate
 exec(code)

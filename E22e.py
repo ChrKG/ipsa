@@ -26,8 +26,18 @@
 def capital(text, words):
     # insert code
     pass
+#> solution
+    D = {word.lower(): word for word in words}
+    return ' '.join(D.get(word.lower(), word) for word in text.split())
+#< solution
 
 
 text = input()
 words = input().split()
+#> validate input
+assert len(text) <= 80
+assert len(words) <= 100
+assert text == ' '.join(text.split())
+assert all(word.isalpha() for word in words)
+#< validate input
 print(capital(text, words))

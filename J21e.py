@@ -46,5 +46,17 @@ def labels(symbols, length):
 
     pass
     
+#> solution
+    assert all(x < y for x, y in zip(symbols, symbols[1:]))
+    assert 0 <= length <= 25
+    assert 1 <= len(symbols) <= 25
+    
+    if length == 0:
+        yield ''
+    else:
+        for symbol in symbols:
+            for label in labels(symbols, length - 1):
+                yield symbol + label
+#< solution
 
 print(*eval(input()))

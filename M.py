@@ -53,12 +53,21 @@
 '''
 
 
+import math
+
 def interpolate(f):
-    pass  # write your code here
+    def wrapper(x):
+        i = math.floor(x)
+        alpha = x - i
+        return (1 - alpha) * f(i) + alpha * f(i + 1)
+
+    return wrapper
 
 
 interpolated_function = eval(input())
 L = eval(input())
+
+assert len(L) <= 100 and all(isinstance(x, float) for x in L)
 
 for x in L:
     print(f'{x:.3f} {interpolated_function(x):.3f}')

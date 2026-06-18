@@ -21,3 +21,12 @@
 
 # insert code
 pass
+#> solution
+from collections import Counter
+fq = Counter(map(int, input().split()))
+assert 1 <= sum(fq.values()) <= 100
+top_fq = max(fq.values())
+for i in sorted(fq):
+    if fq[i] == top_fq:
+        print(i)
+#< solution

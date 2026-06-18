@@ -41,4 +41,20 @@
 '''
 
 
-pass  # write your code here
+x, y = map(int, input().split())
+
+assert -100 <= x <= 100 and -100 <= y <= 100
+
+while True:
+    line = input()
+    if line == 'STOP':
+        break
+
+    assert len(line) == 1 and line in 'NSEW'
+    
+    if line == 'E': x += 1
+    if line == 'W': x -= 1
+    if line == 'N': y += 1
+    if line == 'S': y -= 1
+
+print(x, y)

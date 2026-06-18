@@ -41,3 +41,18 @@
 
 # insert code
 pass
+#> solution
+n = int(input())
+i = int(input())
+j = int(input())
+#< solution
+#> validate input
+assert 1 <= n <= 25 and 0 <= i < n and 0 <= j < n
+#< validate input
+#> solution
+for k in range(n):
+    if k != i: 
+        print('o' * j + '|' + 'o' * (n - j - 1))
+    else:
+        print('-' * j + 'X' + '-' * (n - j - 1))
+#< solution

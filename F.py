@@ -23,4 +23,10 @@
 '''
 
 
-pass  # write your code here
+points = {tuple(map(int, input().split())) for _ in range(3)}
+xs, ys = map(set, zip(*points))
+
+assert len(points) == 3 and len(xs) == 2 and len(ys) == 2
+
+missing, = {(x, y) for x in xs for y in ys} - points
+print(*missing)

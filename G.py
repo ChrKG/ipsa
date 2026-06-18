@@ -46,19 +46,29 @@
 
 
 class Tracker:
-    # insert your code for the methods below
+    def __init__(self, x=0, y=0):
+        self.x = x
+        self.y = y
+
+    def up(self):
+        self.y += 1
+        return self
+
+    def down(self):
+        self.y -= 1
+        return self
+
+    def right(self):
+        self.x += 1
+        return self
+
+    def left(self):
+        self.x -= 1
+        return self
+
+    def print(self):
+        print(self.x, self.y)
+        return self
+
     
-    def __init__
-    
-    def up
-
-    def down
-
-    def right
-
-    def left
-
-    def print
-
-
 eval(input())

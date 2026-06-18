@@ -36,5 +36,14 @@ def divisible(L, x):
     pass  # insert code here
 
 
+def divisible(L, x):
+    return [y // x for y in L if y % x == 0]
+
+
 L, x = eval(input())
+
+assert isinstance(x, int) and 1 <= x <= 10 ** 6
+assert 1 <= len(L) <= 100 and L == sorted(L) and len(L) == len(set(L))
+assert all(isinstance(y, int) and 1 <= y <= 10 ** 6 for y in L)
+
 print(divisible(L, x))

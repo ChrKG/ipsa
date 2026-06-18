@@ -79,3 +79,49 @@
 
 # insert code
 pass
+#> solution
+text = input()
+n = int(input())
+rows = [input() for _ in range(n)]
+w = int(input())
+words = [input() for _ in range(w)]
+keys = {key: (i, j) for i, row in enumerate(rows) for j, key in enumerate(row) if 'A' <= key <= 'Z'}
+
+# validate input
+assert 1 <= len(text) <= 20
+assert all('A' <= c <= 'Z' for c in text)
+assert 1 <= n <= 10
+assert all(len(row) == len(rows[0]) for row in rows)
+assert all(c == '.' or 'A' <= c <= 'Z' for row in rows for c in row)
+assert len(keys) ==  26 == sum('A' <= c <= 'Z' for row in rows for c in row)
+assert 1 <= w <= 1000
+assert words == sorted(words)
+assert len(words) == len(set(words))
+assert all('A' <= c <= 'Z' for word in words for c in word)
+assert max(map(len, words)) <= 20
+# validate
+
+from functools import cache
+
+
+def key_distance(key1, key2):
+    (row1, col1), (row2, col2) = keys[key1], keys[key2]
+    return abs(row1 - row2) + abs(col1 - col2)
+
+
+@cache
+def keyboard_distance(word1, word2):
+    if not word1 or not word2:
+        return 5 * (len(word1) + len(word2))
+    return min(5 + keyboard_distance(word1[:-1], word2),
+               5 + keyboard_distance(word1, word2[:-1]),
+               keyboard_distance(word1[:-1], word2[:-1]) + key_distance(word1[-1], word2[-1]))
+
+
+distances = [keyboard_distance(text, word) for word in words]
+min_distance = min(distances)
+print(min_distance)
+for word, distance in zip(words, distances):
+    if distance == min_distance:
+        print(word)
+#< solution

@@ -55,3 +55,30 @@
 
 # insert code
 pass
+#> solution
+from collections import Counter
+
+k = int(input())
+#< solution
+#> validate input
+assert 1 <= k <= 25
+#< validate input
+#> solution
+fq = Counter()
+for _ in range(k):
+    n = int(input())
+    values = [input() for _ in range(n)]
+#< solution
+#> validate input
+    assert 1 <= n <= 100
+    assert all('A' <= c <= 'Z' for value in values for c in value)
+#< validate input
+#> solution
+    fq += Counter(set(values))
+popular = sorted(key for key, value in fq.items() if 2 * value >= k)
+if popular:
+    for key in popular:
+        print(key)
+else:
+    print('NOTHING POPULAR')
+#< solution

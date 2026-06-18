@@ -49,6 +49,50 @@ r'''
 def same(tree1, tree2):
     # insert code
     pass
+#> validate input
+    def validate(tree):
+        if isinstance(tree, str):
+            assert tree.isalnum()
+            return {tree}
+        else:
+            assert isinstance(tree, tuple)
+            assert len(tree) == 2
+            labels = set()
+            for child in tree:
+                child_labels = validate(child)
+                assert not labels & child_labels
+                labels |= child_labels
+            return labels
+    labels1 = validate(tree1)
+    labels2 = validate(tree2)
+    assert len(labels1) <= 100
+    assert len(labels2) <= 100
+#< validate input
+#> solution (naive recursion)
+    if isinstance(tree1, str) and isinstance(tree2, str):
+        return tree1 == tree2
+    if isinstance(tree1, tuple) and isinstance(tree2, tuple):
+        left1, right1 = tree1
+        left2, right2 = tree2
+        return ((same(left1, left2) and same(right1, right2)) or
+                (same(left1, right2) and same(right1, left2)))
+    return False
+#< solution
+#> solution (making each tree canonical)
+def same(tree1, tree2):
+    def canonical(tree):
+        if isinstance(tree, str):
+            return [tree], tree
+        left, right = tree
+        left_labels, left_canonical_tree = canonical(left)
+        right_labels, right_canonical_tree = canonical(right)
+        labels = sorted(left_labels + right_labels)
+        if left_labels < right_labels:
+            return labels, (left_canonical_tree, right_canonical_tree)
+        else:
+            return labels, (right_canonical_tree, left_canonical_tree)
+    return canonical(tree1) == canonical(tree2)
+#< solution
 
 
 import sys
@@ -57,4 +101,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line is #eof
+assert line.startswith('#eof')
+#< validate
 exec(code)

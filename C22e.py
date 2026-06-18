@@ -27,3 +27,13 @@
 # insert code
 pass
 
+#> solution
+rows = int(input())
+columns = int(input())
+symbol = input()
+assert 1 <= rows <= 25
+assert 1 <= columns <= 25
+assert len(symbol) == 1
+for _ in range(rows):
+    print(symbol * columns)
+#< solution

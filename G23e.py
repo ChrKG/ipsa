@@ -38,3 +38,29 @@
 
 # insert code
 pass
+#> solution
+k = int(input())
+#< solution
+#> validate input
+assert 1 <= k <= 100
+#< validate input
+#> solution
+knows = dict()
+for _ in range(k):
+    a, b = input().split()
+    for x in (a, b):
+        if x not in knows:
+            knows[x] = set()
+#< solution
+#> validate input
+    assert a != b
+    assert a not in knows[b]
+#< validate input
+#> solution
+    knows[b].add(a)
+known = [name for name, others in knows.items() if len(others) == len(knows) - 1]
+if not known:
+    print('-')
+else:
+    print(*sorted(known))
+#< solution

@@ -28,6 +28,25 @@
 def limited_sum(values, limit):
     # insert code
     pass
+#> validate input
+    assert isinstance(values, list)
+    assert all(isinstance(value, int) for value in values)
+    assert all(0 <= value <= 1000 for value in values)
+    assert 1 <= len(values) <= 100
+    assert isinstance(limit, int)
+    assert 0 <= limit <= 20_000
+#< validate input
+#> solution
+    from functools import cache
+    @cache
+    def solve(k, limit):
+        if k == 0:
+            return 0
+        if values[k - 1] > limit:
+            return solve(k - 1, limit)
+        return max(solve(k - 1, limit), values[k - 1] + solve(k - 1, limit - values[k - 1]))
+    return solve(len(values), limit)
+#< solution
 
 
 values = eval(input())

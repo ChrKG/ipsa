@@ -36,3 +36,18 @@
 
 # insert code
 pass
+#> solution
+n, m = map(int, input().split())
+points = [tuple(map(int, input().split())) for _ in range(n)]
+circles = [tuple(map(int, input().split())) for _ in range(m)]
+#< solution
+#> validate input
+assert 1 <= n <= 100 and 1 <= m <= 100
+#< validate input
+#> solution
+covered = 0 
+for x, y in points:
+    if any((x - cx) ** 2 + (y - cy) ** 2 <= r ** 2 for cx, cy, r in circles):
+        covered += 1
+print(covered)
+#< solution

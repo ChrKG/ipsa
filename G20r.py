@@ -41,8 +41,20 @@ def safe_evaluation(f, x):
     pass  # insert code here
     
 
+# solution
+def safe_evaluation(f, x):
+    try:
+        return f(x)
+    except:
+        return None
+
+
 f = eval(input())
 L = eval(input())
+
+assert 1 <= len(L) <= 100
+assert all(isinstance(x, float) for x in L)
+
 for x in L:
     y = safe_evaluation(f, x)
     print(f'{x:.3e}', f'{y:.3e}' if isinstance(y, float) else y)

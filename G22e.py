@@ -57,6 +57,24 @@ class BrokenValue(Exception):
 class FragileValue:
     # insert code
     pass
+#> solution
+    def __init__(self, value):
+        assert value >= 0
+        self.value = value
+
+    def __add__(self, other):
+        if self.value == 0 or other.value == 0:
+            raise BrokenValue
+        self.value -= 1
+        other.value -= 1
+        return FragileValue(self.value + other.value)
+
+    def __str__(self):
+        if self.value == 0:
+            raise BrokenValue
+        self.value -= 1
+        return str(self.value)
+#< solution
 
 
 import sys
@@ -65,6 +83,9 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line is #eof
+assert line.startswith('#eof')
+#< validate
 
 try:
     exec(code)

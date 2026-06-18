@@ -33,3 +33,17 @@
 
 pass
 
+#> solution
+n = int(input())
+assert 1 <= n <= 100
+S = set()
+for _ in range(n):
+    command, value = input().split()
+    assert command in {'insert', 'delete'}
+    value = int(value)
+    if command == 'insert':
+        S.add(value)
+    else:
+        S.discard(value)
+print(*sorted(S))
+#< solution

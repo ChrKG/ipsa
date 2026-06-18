@@ -35,6 +35,19 @@
 def correct(strings):
     # insert code
     pass
+#> validate input
+    assert 1 <= len(strings) <= 10
+    assert all(isinstance(string, str) for string in strings)
+    assert all(1<= len(string) == len(strings[0]) <= 10 for string in strings)
+#< validate input
+#> solution
+    answer = ['?'] * len(strings[0])
+    for i, chars in enumerate(zip(*strings)):
+        for char in chars:
+            if chars.count(char) > len(chars) / 2:
+                answer[i] = char
+    return ''.join(answer)
+#< solution
 
 
 print(correct(input().split()))

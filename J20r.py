@@ -67,5 +67,41 @@ class Count:
         pass  # insert code
 
 
+# solution 1 - generator
+class Count:
+    def __init__(self, n):
+        self.n = n
+
+    def __iter__(self):
+        x = 1
+        while True:
+            for y in range(1, self.n + 1):
+                yield(x, y)
+            x += 1
+
+# solution 2 - iterator class
+class Count:
+    def __init__(self, n):
+        self.n = n
+
+    def __iter__(self):
+        return CountIterator(self)
+
+
+class CountIterator:
+    def __init__(self, count):
+        self.count = count
+        self.x = 1
+        self.y = 1
+
+    def __next__(self):
+        answer = (self.x, self.y)
+        self.y += 1
+        if self.y > self.count.n:
+            self.y = 1
+            self.x += 1
+        return answer
+
+
 expression = input()
 print(eval(expression))

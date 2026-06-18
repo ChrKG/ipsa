@@ -44,3 +44,15 @@
 
 # insert code
 pass
+#> solution
+n = int(input())
+assert 1 <= n <= 10
+rows = [input() for _ in range(n)]
+assert all(len(row) == len(rows[0]) for row in rows)
+assert all(c == '.' or 'A' <= c <= 'Z' for row in rows for c in row)
+keys = {key: (i, j) for i, row in enumerate(rows) for j, key in enumerate(row) if 'A' <= key <= 'Z'}
+assert 1 <= len(keys) ==  sum('A' <= c <= 'Z' for row in rows for c in row)
+print(' ', *sorted(keys), sep='  ')
+for key1, (i1, j1) in sorted(keys.items()):
+    print(key1, *[f'{abs(i1 - i2) + abs(j1 - j2):2d}' for key2, (i2, j2) in sorted(keys.items())])
+#< solution

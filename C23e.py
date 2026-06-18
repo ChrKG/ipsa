@@ -41,8 +41,22 @@
 def extreme(table):
     # insert code
     pass
+#> solution
+    columns = list(zip(*table))
+    for i, row in enumerate(table):
+        for j, column in enumerate(columns):
+            if max(row) == min(column) == table[i][j]:
+                return (i, j)
+    return (-1, -1)
+#< solution
 
 
 n = int(input())
 table = [list(map(int, input().split())) for _ in range(n)]
+#> validate input
+assert 1 <= n <= 25
+assert all(len(row) == n for row in table)
+assert all(type(x) == int for row in table for x in row)
+assert set(x for row in table for x in row) == set(range(1, n * n + 1))
+#< validate input
 print(extreme(table))

@@ -71,3 +71,24 @@
 
 # insert code
 pass
+#> solution
+width, height, n = map(int, input().split())
+assert 1 <= width <= 25 and 1 <= height <= 25 and n <= 25
+canvas = [['.'] * width for _ in range(height)]
+for _ in range(n):
+    x0, y0, x1, y1 = map(int, input().split())
+    
+    assert 0 <= x0 < width
+    assert 0 <= x1 < width
+    assert 0 <= y0 < height
+    assert 0 <= y1 < height
+    assert x0 == x1 or y0 == y1 or abs(x1 - x0) == abs(y1 - y0)
+    
+    d = max(abs(x1 - x0), abs(y1 - y0), 1)
+
+    for i in range(d + 1):
+        canvas[y0 + i * (y1 - y0) // d][x0 + i * (x1 - x0) // d] = 'X'
+
+for row in reversed(canvas):
+    print(*row, sep='')
+#< solution

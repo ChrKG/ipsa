@@ -25,6 +25,12 @@
 def contract(seq):
     # insert code
     pass
+#> solution
+    for i, value in enumerate(seq):
+        if i == 0 or value != last:
+            yield value
+        last = value
+#< solution
 
 
 import sys
@@ -33,4 +39,7 @@ for line in sys.stdin:
     code += line
     if line.startswith('#eof'):
         break
+#> validate last line
+assert line.startswith('#eof')
+#< validate
 exec(code)

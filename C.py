@@ -47,10 +47,13 @@
 
 
 def print_table(f, n, m):
-    pass  # write your code here
-
+    for i in range(n + 1):
+        print(*[f(i, j) for j in range(m + 1)])
+        
 
 f = eval(input())
 n, m = map(int, input().split())
+
+assert 0 <= n <= 25 and 0 <= m <= 25
 
 print_table(f, n, m)

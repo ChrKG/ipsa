@@ -38,7 +38,25 @@ r'''
 def mirror(tree):
     # insert code
     pass
+#> solution
+    if tree == None:
+        return None
+    left, value, right = tree
+    return (mirror(right), value, mirror(left))
+#< solution
 
 
 tree = eval(input())
+#> validate input
+def values(tree):
+    if tree == None:
+        return []
+    left, value, right = tree
+    return [*values(left), value, *values(right)]
+
+vs = values(tree)
+assert 1 <= len(vs) <= 100
+assert all(isinstance(v, int) for v in vs)
+assert len(vs) == len(set(vs))
+#< validate input
 print(mirror(tree))

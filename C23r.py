@@ -41,3 +41,15 @@
 
 # insert code
 pass
+#> solution
+text = input()
+n = len(text)
+#< solution
+#> validate input
+assert text == text.strip()
+assert 1 <= n <= 25
+#< validate input
+#> solution
+for i in reversed(range((len(text) + 1) // 2)):
+    print('.' * i + text[i:n - i] + '.' * i)
+#< solution

@@ -27,6 +27,14 @@
 def restrict(dictionary, keys):
     # insert code
     pass
+#> validate input
+    assert isinstance(dictionary, dict) and isinstance(keys, list)
+    assert len(keys) == len(set(keys))
+    assert len(dictionary) <= 100 and len(keys) <= 100
+#< validate
+#> solution
+    return {k: v for k, v in dictionary.items() if k in keys}
+#< solution
 
 
 print(eval(input()))

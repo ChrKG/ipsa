@@ -26,8 +26,25 @@
 
 
 def labels(chars, n, k):
+#> validate input
+    assert all('a' <= char <= 'z' for char in chars)
+    assert len(chars) == len(set(chars))
+    assert list(chars) == sorted(chars)
+    assert 0 <= n <= 10
+    assert 0 <= k <= min(10, len(chars))
+#< validate input
     # insert code
     pass
+#> solution
+    if n == 0:
+        yield ''
+    else:
+        for label in labels(chars, n - 1, k):
+            for char in chars:
+                new_label = label + char
+                if len(set(new_label)) <= k:
+                    yield new_label
+#< solution
 
 
 expression = input()

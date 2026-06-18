@@ -35,3 +35,21 @@
 
 # insert code
 pass
+#> solution
+n = int(input())
+names = [input() for _ in range(n)]
+m = int(input())
+exclude = [input() for _ in range(m)]
+#< solution
+#> validate input
+assert 1 <= n <= 100
+assert 0 <= m <= n
+assert all(name.isalpha() for name in names)
+assert len(names) == len(set(names))
+assert all(name.isalpha() for name in exclude)
+assert len(exclude) == len(set(exclude))
+assert set(exclude) <= set(names)
+#< validate input
+#> solution
+print(*sorted(set(names) - set(exclude)), sep='\n')
+#< solution

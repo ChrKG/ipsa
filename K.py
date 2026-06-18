@@ -54,9 +54,29 @@
 
 '''
 
+
 def reachable(n, start, moves):
-    pass  # insert code here
+    Q = {start}
+    seen = {start}
+    while Q:
+        (x, y) = cell = Q.pop()
+        for dx, dy in moves:
+            cell_ = (x_, y_) = (x + dx, y + dy)
+            if 0 <= x_ < n and 0 <= y_ < n and cell_ not in seen:
+                seen.add(cell_)
+                Q.add(cell_)
+
+    for y in range(n)[::-1]:
+        for x in range(n):
+            char = '.'
+            if (x, y) in seen: char = 'x'
+            if (x, y) == start: char = 'S'
+            print(char, end='')
+        print()
 
 
 n, start, moves = eval(input())
+
+assert 1 <= n <= 200
+
 reachable(n, start, moves)

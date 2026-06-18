@@ -40,6 +40,15 @@ r'''
 def remove_unary(tree):
     # insert code
     pass
+#> solution
+    if not isinstance(tree, tuple):
+        assert isinstance(tree, str)  # validate input
+        return tree
+    assert len(tree) >= 1  # validate input
+    if len(tree) == 1:
+        return remove_unary(tree[0])
+    return tuple(remove_unary(child) for child in tree)
+#< solution
 
 
 print(eval(input()))

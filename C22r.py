@@ -18,3 +18,9 @@
 
 # insert code
 pass
+#> solution
+s = input()
+assert 1 <= len(s) <= 100
+assert all('a' <= c <= 'z' or 'A' <= c <= 'Z' for c in s)
+print(''.join(c for c in s if 'A' <= c <= 'Z'))
+#< solution

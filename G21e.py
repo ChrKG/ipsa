@@ -26,6 +26,20 @@ def valid_range(f):
 
     pass
 
+#> solution
+    try:
+        for high in range(0, 1002):
+            f(high)
+    except Exception:
+        pass
+    try:
+        for low in range(0, -1002, -1):
+            f(low)
+    except Exception:
+        pass
+    
+    return low + 1, high - 1
+#< solution
 
 f = eval(input())
 print(valid_range(f))

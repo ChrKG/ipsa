@@ -36,6 +36,42 @@ def safe_distance(target, vectors):
 
     pass
 
+#> solution
+import math
+from functools import cache
+
+def safe_distance(target, vectors):
+    points = {(0, 0)}
+    for x, y in vectors:
+        points |= {(px + x, py + y) for px, py in points}
+    x, y = target
+    return math.sqrt(min((x - px) ** 2 + (y - py) ** 2 for px, py in points))
+
+def memoize(f):
+    answers = {}
+    def wrapper(*args):
+        if args not in answers:
+            answers[args] = f(*args)
+        return answers[args]
+    return wrapper
+
+def safe_distance(target, vectors):
+    x, y = target
+    assert abs(x) <= 500 and abs(y) <= 500
+    assert all(-10 <= x <= 10 and -10 <= y <= 10 for x, y in vectors)
+    assert len(vectors) <= 50.
+    assert len(vectors) == len(set(vectors))
+#    @cache
+    @memoize
+    def solve(target, i):
+        x, y = target
+        if i == 0:
+            return x ** 2 + y ** 2
+        xi, yi = vectors[i - 1]
+        return min(solve(target, i - 1), solve((x - xi, y - yi), i - 1))
+
+    return math.sqrt(solve(target, len(vectors)))
+#< solution
 
 target, vectors = eval(input())
 distance = safe_distance(target, vectors)
